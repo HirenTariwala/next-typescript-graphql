@@ -1,0 +1,31 @@
+.ProfileContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+
+  .homeButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  .searchbar {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+  }
+  .characterImage {
+    height: 250px;
+    padding: 5px;
+  }
+
+  .metaInfo {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    * {
+      width: 150px;
+    }
+  }
+}

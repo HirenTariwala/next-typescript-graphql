@@ -1,0 +1,29 @@
+import { useLazyQuery } from "@apollo/client";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CharactersPage from "../components/CharactersPage";
+import { savePageCharacters } from "../components/CharactersPage/slice";
+import { GET_CHARACTERS } from "../graphql/operations/character";
+import { RootState } from "../store/store";
+
+export default function Home() {
+  const dispatch = useDispatch();
+  const { currentPageNumber } = useSelector((state: RootState) => state.charactersDetail)
+  const [getCharacters, { loading, error, data }] = useLazyQuery(GET_CHARACTERS, {
+    variables: { page: currentPageNumber },
+  });
+  
+  useEffect(() => {
+    const count = data?.characters?.info?.count;
+    const characters = data?.characters?.results;
+    dispatch(savePageCharacters({ count, characters }));
+  }, [data]);
+
+  useEffect(() => {
+    getCharacters({variables: { page: currentPageNumber }})
+  }, [currentPageNumber])
+
+  if (loading && currentPageNumber === 1) return <h1>Loading...</h1>;
+  if (error) return <h2>{`Error occurred: ${error}`}</h2>;
+  return <CharactersPage />;
+}
