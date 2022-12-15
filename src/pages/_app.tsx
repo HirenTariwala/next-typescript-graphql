@@ -7,7 +7,6 @@ import AppLayout from "../components/Layout";
 import store from "../store/store";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallbackComponent from "../common/ErrorFallbackComponent";
-import { useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

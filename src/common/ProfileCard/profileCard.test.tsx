@@ -1,6 +1,5 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import ProfileCard from ".";
-import { getPageUrl } from "./util";
 
 describe("Test Profile card component", () => {
   const character = {

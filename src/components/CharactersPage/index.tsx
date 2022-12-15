@@ -5,7 +5,7 @@ import ProfileCard from "../../common/ProfileCard";
 import { ICharacterDetail } from "../../common/type";
 import Styles from "./characterPage.module.scss";
 import Pagination from "../../common/Pagination";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SearchComponent from "../../common/Search";
 import { useSearchParams, useRouter } from "next/navigation";
 import { setCurrentPageNumber } from "./slice";

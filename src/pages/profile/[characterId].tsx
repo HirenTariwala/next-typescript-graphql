@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import Styles from "./profile.module.scss";
 import { ICharacterDetail } from "../../common/type";
-import Link from "next/link";
 import SearchComponent from "../../common/Search";
 import { saveLast10VisitedProfiles } from "../../components/CharactersPage/slice";
 
