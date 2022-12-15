@@ -3,6 +3,8 @@ import { Badge as CardBadge } from "antd";
 import { getStatusColor } from "../constants";
 import { IGetStatusColor } from "../type";
 
+const { Ribbon } = CardBadge;
+
 interface IBadgeProps {
     status: string;
     children: React.ReactNode
@@ -10,12 +12,12 @@ interface IBadgeProps {
 
 const Badge: React.FC<IBadgeProps> = ({ status, children }) => {
   return (
-    <CardBadge.Ribbon
+    <Ribbon
       text={status}
       color={getStatusColor[status as keyof IGetStatusColor]}
     >
       {children}
-    </CardBadge.Ribbon>
+    </Ribbon>
   );
 };
 

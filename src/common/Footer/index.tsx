@@ -1,12 +1,13 @@
 import { Layout, Typography } from 'antd';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
 
 const { Footer: MyFooter } = Layout;
 const { Title } = Typography;
 
-const Footer = () => {
-  const { last10VisitedProfiles } = useSelector((state: RootState) => state.charactersDetail);
+interface IFooterProps {
+  last10VisitedProfiles: string[]
+}
+
+const Footer:React.FC<IFooterProps> = ({ last10VisitedProfiles }) => {
   return (
     <>
         <MyFooter style={{ backgroundColor: "black" }}>

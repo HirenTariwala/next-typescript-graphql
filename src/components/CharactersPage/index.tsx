@@ -7,16 +7,17 @@ import Styles from "./characterPage.module.scss";
 import Pagination from "../../common/Pagination";
 import React, { useEffect, useState } from "react";
 import SearchComponent from "../../common/Search";
-import { useRouter } from "next/router";
+import { useSearchParams, useRouter } from "next/navigation";
 import { setCurrentPageNumber } from "./slice";
 
 const { Title } = Typography;
 
 const CharactersPage = () => {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const dispatch = useDispatch();
-  const { query } = router;
-  const [searchString, setSearchString] = useState<string>(query?.q as string);
+  const query = searchParams.get("q");
+  const [searchString, setSearchString] = useState<string>(query as string);
   const { allCharacters, charactersCount, currentPageNumber } = useSelector(
     (state: RootState) => state.charactersDetail
   );
