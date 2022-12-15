@@ -1,14 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
+import Head from "next/head";
 import { List, Typography } from "antd";
+import React, { useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+
 import { RootState } from "../../store/store";
 import ProfileCard from "../../common/ProfileCard";
 import { ICharacterDetail } from "../../common/type";
 import Styles from "./characterPage.module.scss";
 import Pagination from "../../common/Pagination";
-import React, { useState } from "react";
 import SearchComponent from "../../common/Search";
-import { useSearchParams, useRouter } from "next/navigation";
-import { setCurrentPageNumber } from "./slice";
+import { setCurrentPageNumber } from "./duck/slice";
+import { COPY } from "../../common/constants";
 
 const { Title } = Typography;
 
@@ -33,15 +36,18 @@ const CharactersPage = () => {
 
   return (
     <div className={Styles.listContainer}>
+      <Head>
+        <title>Home</title>
+      </Head>
       <div className={Styles.appHeading}>
-        <Title level={1}>Rick and Morty</Title>
+        <Title level={1}>{COPY.RICK_AND_MONTY_CHARACTERS}</Title>
       </div>
       <div className={Styles.searchCharacter}>
         <SearchComponent
           size={"large"}
           allowClear={true}
           searchValue={searchString}
-          placeholder={"Search"}
+          placeholder={COPY.SEARCH_INPUT_PLACEHOLDER}
           onSearch={onSearch}
           onChange={onChange}
         />

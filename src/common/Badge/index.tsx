@@ -1,5 +1,6 @@
 import React from "react";
 import { Badge as CardBadge } from "antd";
+
 import { getStatusColor } from "../constants";
 import { IGetStatusColor } from "../type";
 

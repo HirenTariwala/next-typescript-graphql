@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ICharactersPageSlice } from "./duck/type";
+import { ICharactersPageSlice } from "./type";
 
 const initialState: ICharactersPageSlice = {
     charactersCount: 0,

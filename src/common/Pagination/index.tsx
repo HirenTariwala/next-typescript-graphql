@@ -1,8 +1,9 @@
 import React from "react";
 import { Pagination as AntdPagination } from "antd";
-import { IPaginationProps } from "../type";
-import { setCurrentPageNumber } from "../../components/CharactersPage/slice";
 import { useDispatch } from "react-redux";
+
+import { IPaginationProps } from "../type";
+import { setCurrentPageNumber } from "../../components/CharactersPage/duck/slice";
 
 const Pagination: React.FC<IPaginationProps> = ({ total, currentPageNumber }) => {
   const dispatch = useDispatch();

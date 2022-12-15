@@ -1,14 +1,17 @@
+import React, { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import Image from "next/image";
-import { Button, Card, Layout } from "antd";
+import { Button, Card, Layout, Typography } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import Styles from "./profile.module.scss";
 import { ICharacterDetail } from "../../common/type";
 import SearchComponent from "../../common/Search";
-import { saveLast10VisitedProfiles } from "../../components/CharactersPage/slice";
+import { saveLast10VisitedProfiles } from "../../components/CharactersPage/duck/slice";
+import { COPY } from "../../common/constants";
+import Head from "next/head";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -24,19 +27,30 @@ const Profile = () => {
     (state: RootState) => state.charactersDetail
   );
   const { characterId } = router.query;
+
   useEffect(() => {
-    if (allCharacters && characterId) {
-      const profile = allCharacters.find((el) => el.id === characterId);
+    saveProfileInLast10VisitedList(allCharacters, characterId);
+  }, [allCharacters, characterId]);
+
+  const saveProfileInLast10VisitedList = (
+    characters: ICharacterDetail[],
+    characterID?: string | string[]
+  ) => {
+    if (allCharacters.length > 0 && characterID) {
+      const profileId = (characterID as string).split("-")[0];
+      const profile = allCharacters.find((el) => el.id === profileId);
       if (last10VisitedProfiles.length === 10 && profile) {
         const visitedProfiles = [...last10VisitedProfiles, profile?.name];
         visitedProfiles.shift();
-        dispatch(saveLast10VisitedProfiles(visitedProfiles))
+        dispatch(saveLast10VisitedProfiles(visitedProfiles));
       } else {
-        dispatch(saveLast10VisitedProfiles([...last10VisitedProfiles, profile?.name]))
+        dispatch(
+          saveLast10VisitedProfiles([...last10VisitedProfiles, profile?.name])
+        );
       }
       setSelectedProfile(profile);
     }
-  }, [allCharacters, characterId]);
+  };
 
   const onSearch = (value: string) => {
     if (value.length > 0) {
@@ -45,21 +59,34 @@ const Profile = () => {
   };
 
   const onButtonClick = () => {
-    Router.push("/")
-  }
+    Router.push("/");
+  };
 
-  const onChange = (e: any) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value);
-  }
+  };
   return (
     <Content className={Styles.ProfileContainer}>
-      <Button type="link" icon={<ArrowLeftOutlined />} className={Styles.homeButton} onClick={onButtonClick}>Home</Button>
+      <Head>
+        <title>{selectedProfile?.name}</title>
+      </Head>
+      <div>
+        <Button
+          type="link"
+          icon={<ArrowLeftOutlined />}
+          className={Styles.homeButton}
+          onClick={onButtonClick}
+        >
+          Home
+        </Button>
+      </div>
+
       <div className={Styles.searchbar}>
-      <SearchComponent
+        <SearchComponent
           size={"large"}
           allowClear={true}
           searchValue={searchString}
-          placeholder={"Search"}  
+          placeholder={COPY.SEARCH_INPUT_PLACEHOLDER}
           onSearch={onSearch}
           onChange={onChange}
         />
@@ -78,6 +105,10 @@ const Profile = () => {
           />
         }
       >
+        <div className={Styles.metaInfo}>
+          <Meta title="Name" />
+          <Meta description={selectedProfile?.name} />
+        </div>
         <div className={Styles.metaInfo}>
           <Meta title="Species" />
           <Meta description={selectedProfile?.species} />

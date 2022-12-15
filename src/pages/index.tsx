@@ -2,7 +2,7 @@ import { useLazyQuery } from "@apollo/client";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CharactersPage from "../components/CharactersPage";
-import { savePageCharacters } from "../components/CharactersPage/slice";
+import { savePageCharacters } from "../components/CharactersPage/duck/slice";
 import { GET_CHARACTERS } from "../graphql/operations/character";
 import { RootState } from "../store/store";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "antd";
-import { ISearchComponentProps } from "../type";
 import { SizeType } from "antd/es/config-provider/SizeContext";
+import { ISearchComponentProps } from "../type";
 
 const { Search } = Input;
 

@@ -1,9 +1,11 @@
 import { Card } from "antd";
 import Image from "next/image";
 import Link from "next/link";
+
 import Badge from "../Badge";
 import { IProfileCardProps } from "../type";
 import Styles from "./profileCard.module.scss";
+
 const { Meta } = Card;
 
 const ProfileCard: React.FC<IProfileCardProps> = ({ character, index }) => {
@@ -23,10 +25,15 @@ const ProfileCard: React.FC<IProfileCardProps> = ({ character, index }) => {
             />
           }
         >
-          <Meta title={character?.name} />
-          <Link href={`/profile/${character.id}`}>
+          <Meta title={character?.name} className={Styles.characterName} />
+          <Link
+            href={`/profile/${character.id}-${character?.name
+              .split(" ")
+              .join("-")
+              .toLowerCase()}`}
+          >
             Open Profile
-          </Link> 
+          </Link>
         </Card>
       </Badge>
     </div>
