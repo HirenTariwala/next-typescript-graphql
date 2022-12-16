@@ -18,6 +18,6 @@ describe("Test Profile card component", () => {
     const { getByText, getByRole } = render(<ProfileCard character={character} index={1} />);
     expect(getByText(character.name)).toBeInTheDocument();
     expect(getByText("Open Profile")).toBeInTheDocument();
-    expect(getByRole('link')).toHaveAttribute('href', `/profile/${character.id}`);
+    expect(getByRole('link')).toHaveAttribute('href', `/profile/${character.id}-rick-sanchez`);
   });
 });
